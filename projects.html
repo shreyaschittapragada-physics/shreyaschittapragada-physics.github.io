@@ -32,11 +32,6 @@ nav {
 nav a {
     color: #93c5fd;
     text-decoration: none;
-    font-size: 14px;
-}
-
-nav a:hover {
-    color: white;
 }
 
 /* SECTION */
@@ -44,10 +39,6 @@ section {
     max-width: 900px;
     margin: auto;
     padding: 110px 20px;
-}
-
-h1 {
-    font-size: 36px;
 }
 
 /* CARDS */
@@ -58,18 +49,14 @@ h1 {
     border: 1px solid #1f2937;
     margin-top: 15px;
     cursor: pointer;
-    transition: 0.35s ease;
 }
 
 .card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     border-color: #3b82f6;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.55);
 }
 
-h2 {
-    color: #60a5fa;
-}
+h2 { color: #60a5fa; }
 
 /* REVEAL */
 .reveal {
@@ -91,34 +78,46 @@ h2 {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.85);
     backdrop-filter: blur(10px);
     z-index: 2000;
 }
 
 .modal-content {
     background: #111827;
-    margin: 8% auto;
+    margin: 5% auto;
     padding: 22px;
-    width: 85%;
-    max-width: 700px;
+    width: 90%;
+    max-width: 800px;
     border-radius: 16px;
     border: 1px solid #1f2937;
 }
 
 .close {
     float: right;
-    cursor: pointer;
     font-size: 26px;
+    cursor: pointer;
     color: #93c5fd;
 }
 
-pre {
-    background: #0b1220;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #1f2937;
-    overflow-x: auto;
+/* SVG wiring style */
+svg {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.wire {
+    stroke: #60a5fa;
+    stroke-width: 2;
+}
+
+.node {
+    fill: #93c5fd;
+}
+
+.label {
+    fill: #e5e7eb;
+    font-size: 12px;
 }
 </style>
 </head>
@@ -138,96 +137,135 @@ pre {
 <h1 class="reveal">Projects</h1>
 
 <div class="card reveal" onclick="openProject('drainage')">
-    <h2>Smart Drainage System</h2>
-    <p>Arduino + HC-SR04 + GSM + I2C</p>
+<h2>Smart Drainage System</h2>
+<p>Arduino + HC-SR04 + GSM + I2C</p>
 </div>
 
 <div class="card reveal" onclick="openProject('earthquake')">
-    <h2>Earthquake Detection System</h2>
-    <p>Arduino + Vibration Sensor (SW-420)</p>
+<h2>Earthquake Detection System</h2>
+<p>Arduino + Vibration Sensor</p>
 </div>
 
 </section>
 
 <!-- MODAL -->
 <div id="modal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div id="modal-body"></div>
-    </div>
+<div class="modal-content">
+<span class="close" onclick="closeModal()">&times;</span>
+<div id="modal-body"></div>
+</div>
 </div>
 
 <script>
 
-/* REVEAL ANIMATION */
+/* REVEAL */
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.classList.add("active");
-            }, i * 80);
-        }
-    });
-}, { threshold: 0.12 });
+entries.forEach((entry,i)=>{
+if(entry.isIntersecting){
+setTimeout(()=>entry.target.classList.add("active"),i*80);
+}
+});
+},{threshold:0.12});
 
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));
 
-/* MODAL LOGIC */
-function openProject(type) {
-    let content = "";
+/* OPEN PROJECT */
+function openProject(type){
 
-    if (type === "drainage") {
-        content = `
-        <h2>Smart Drainage System</h2>
-        <p><b>Purpose:</b> Detects water overflow in real-time and sends alerts.</p>
+let content="";
 
-        <p><b>Components:</b></p>
-        <ul>
-            <li>Arduino UNO</li>
-            <li>HC-SR04 Ultrasonic Sensor</li>
-            <li>SIM900A GSM Module</li>
-            <li>I2C Communication</li>
-            <li>Buzzer</li>
-        </ul>
+if(type==="drainage"){
+content=`
+<h2>Smart Drainage System</h2>
+<p><b>Real Wiring Schematic (Arduino Level)</b></p>
 
-        <p><b>Working Flow:</b></p>
-        <pre>
-Water Level → HC-SR04 → Arduino → GSM SMS Alert
-                              ↓
-                           Buzzer
-        </pre>
+<svg viewBox="0 0 600 300">
 
-        <p><b>Impact:</b> Smart flood prevention system for urban drainage monitoring.</p>
-        `;
-    }
+<!-- Arduino -->
+<rect x="250" y="120" width="100" height="60" fill="#1f2937" stroke="#60a5fa"/>
+<text x="265" y="155" class="label">Arduino UNO</text>
 
-    if (type === "earthquake") {
-        content = `
-        <h2>Earthquake Detection System</h2>
-        <p><b>Purpose:</b> Detects seismic vibrations and triggers emergency alerts.</p>
+<!-- Sensor -->
+<circle cx="100" cy="100" r="15" class="node"/>
+<text x="70" y="80" class="label">HC-SR04</text>
 
-        <p><b>Components:</b></p>
-        <ul>
-            <li>Arduino UNO</li>
-            <li>SW-420 Vibration Sensor</li>
-            <li>Buzzer</li>
-        </ul>
+<!-- GSM -->
+<circle cx="500" cy="100" r="15" class="node"/>
+<text x="480" y="80" class="label">GSM</text>
 
-        <p><b>Working Flow:</b></p>
-        <pre>
-Ground Vibration → Sensor → Arduino → Alarm Trigger
-        </pre>
+<!-- Buzzer -->
+<circle cx="100" cy="220" r="15" class="node"/>
+<text x="80" y="200" class="label">Buzzer</text>
 
-        <p><b>Impact:</b> Early warning prototype for disaster detection systems.</p>
-        `;
-    }
+<!-- Wires -->
+<line x1="115" y1="100" x2="250" y2="140" class="wire"/>
+<line x1="350" y1="140" x2="485" y2="100" class="wire"/>
+<line x1="300" y1="180" x2="100" y2="205" class="wire"/>
 
-    document.getElementById("modal-body").innerHTML = content;
-    document.getElementById("modal").style.display = "block";
+</svg>
+
+<p><b>Pin Mapping:</b></p>
+<pre>
+HC-SR04 → Arduino
+VCC → 5V
+GND → GND
+TRIG → D9
+ECHO → D10
+
+GSM Module:
+TX → RX
+RX → TX
+VCC → 5V External
+</pre>
+`;
 }
 
-function closeModal() {
-    document.getElementById("modal").style.display = "none";
+if(type==="earthquake"){
+content=`
+<h2>Earthquake Detection System</h2>
+
+<p><b>Real Wiring Schematic</b></p>
+
+<svg viewBox="0 0 600 250">
+
+<!-- Arduino -->
+<rect x="250" y="100" width="100" height="60" fill="#1f2937" stroke="#60a5fa"/>
+<text x="265" y="135" class="label">Arduino UNO</text>
+
+<!-- Sensor -->
+<circle cx="120" cy="130" r="15" class="node"/>
+<text x="80" y="110" class="label">Vibration</text>
+
+<!-- Buzzer -->
+<circle cx="480" cy="130" r="15" class="node"/>
+<text x="460" y="110" class="label">Buzzer</text>
+
+<!-- Wires -->
+<line x1="135" y1="130" x2="250" y2="130" class="wire"/>
+<line x1="350" y1="130" x2="465" y2="130" class="wire"/>
+
+</svg>
+
+<p><b>Pin Mapping:</b></p>
+<pre>
+Vibration Sensor:
+VCC → 5V
+GND → GND
+DO → D2
+
+Buzzer:
++ → D8
+- → GND
+</pre>
+`;
+}
+
+document.getElementById("modal-body").innerHTML=content;
+document.getElementById("modal").style.display="block";
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
 }
 
 </script>
