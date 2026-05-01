@@ -88,7 +88,7 @@ pre {
     border-radius: 8px;
 }
 
-h3 { color: #93c5fd; }
+h3 { color: #93c5fd; margin-top: 18px; }
 </style>
 </head>
 
@@ -133,16 +133,22 @@ content=`
 <h2>Smart Drainage System (Dual Arduino - I2C)</h2>
 
 <p>
-This system uses two Arduino boards communicating via I2C.
-The first Arduino (Slave) measures water level using an ultrasonic sensor.
-The second Arduino (Master) processes the data and triggers GSM alerts and buzzer.
+An intelligent drainage monitoring system designed to detect overflow conditions in real-time. 
+The system uses ultrasonic sensing to measure water levels and sends alerts via GSM when critical thresholds are reached.
+</p>
+
+<h3>Why Dual Arduino?</h3>
+<p>
+Using two Arduino boards separates sensing and communication tasks. 
+The Slave Arduino handles precise ultrasonic timing, while the Master Arduino manages GSM communication, 
+improving reliability and reducing processing delays.
 </p>
 
 <h3>System Architecture</h3>
 <p>
-• Slave Arduino → Sensor Processing  
-• Master Arduino → Decision + GSM Alert  
-• Communication via I2C (SDA, SCL)
+• Slave Arduino → Water level sensing (HC-SR04)<br>
+• Master Arduino → Decision making + GSM alert + buzzer<br>
+• Communication → I2C protocol (SDA, SCL)
 </p>
 
 <h3>Circuit Diagram</h3>
@@ -158,9 +164,9 @@ GND  → GND
 TRIG → D9
 ECHO → D10
 
-I2C BETWEEN ARDUINOS
-SDA → A4 (both)
-SCL → A5 (both)
+I2C COMMUNICATION
+SDA → A4 (both Arduinos)
+SCL → A5 (both Arduinos)
 GND → Common
 
 GSM (Master Arduino)
@@ -176,9 +182,41 @@ BUZZER (Master)
 
 <h3>Working Principle</h3>
 <p>
-The Slave Arduino continuously measures water level using ultrasonic sensing.
-Data is sent via I2C to the Master Arduino.
-If threshold is exceeded, Master triggers buzzer and sends SMS using GSM module.
+The ultrasonic sensor continuously measures the distance to the water surface. 
+This data is transmitted via I2C from the Slave Arduino to the Master Arduino. 
+If the water level exceeds a predefined threshold, the Master Arduino activates the buzzer 
+and sends an alert message using the GSM module.
+</p>
+
+<h3>Key Features</h3>
+<p>
+• Real-time water level monitoring<br>
+• Remote alert system via GSM<br>
+• Modular design using I2C communication<br>
+• Reliable multi-controller architecture
+</p>
+
+<h3>Advantages</h3>
+<p>
+• Faster processing due to task separation<br>
+• Scalable system design<br>
+• Improved fault tolerance<br>
+• Suitable for urban drainage systems
+</p>
+
+<h3>Limitations</h3>
+<p>
+• Requires stable power supply for GSM module<br>
+• Slight increase in hardware complexity<br>
+• Calibration needed for accurate sensing
+</p>
+
+<h3>Future Improvements</h3>
+<p>
+• IoT integration (cloud monitoring)<br>
+• Mobile app alerts<br>
+• Solar-powered deployment<br>
+• AI-based flood prediction
 </p>
 `;
 }
@@ -188,8 +226,14 @@ content=`
 <h2>Earthquake Detection System</h2>
 
 <p>
-This system detects ground vibrations using a vibration sensor.
-When vibration exceeds a threshold, a buzzer is activated.
+A simple and effective system designed to detect ground vibrations using a vibration sensor 
+and alert users through a buzzer mechanism.
+</p>
+
+<h3>System Overview</h3>
+<p>
+The system continuously monitors vibrations in the environment. 
+When the detected vibration exceeds a certain threshold, it triggers an alert.
 </p>
 
 <h3>Circuit Diagram</h3>
@@ -199,20 +243,50 @@ When vibration exceeds a threshold, a buzzer is activated.
 
 <h3>Pin Connections</h3>
 <pre>
-Vibration Sensor:
+Vibration Sensor (SW-420)
 VCC → 5V
 GND → GND
 DO  → D2
 
-Buzzer:
+Buzzer
 + → D8
 - → GND
 </pre>
 
 <h3>Working Principle</h3>
 <p>
-The vibration sensor detects motion and sends signal to Arduino.
-If it crosses threshold, buzzer is activated.
+The vibration sensor outputs a digital signal when movement is detected. 
+The Arduino reads this signal and determines if it exceeds a preset threshold. 
+If triggered, the buzzer is activated to provide an immediate alert.
+</p>
+
+<h3>Key Features</h3>
+<p>
+• Instant vibration detection<br>
+• Simple and low-cost design<br>
+• Fast response alert system
+</p>
+
+<h3>Advantages</h3>
+<p>
+• Easy to implement<br>
+• Low power consumption<br>
+• Compact and portable
+</p>
+
+<h3>Limitations</h3>
+<p>
+• Cannot measure earthquake magnitude<br>
+• Sensitive to noise and false triggers<br>
+• Limited range of detection
+</p>
+
+<h3>Future Improvements</h3>
+<p>
+• Integration with IoT alert systems<br>
+• Data logging and analysis<br>
+• Multi-sensor network for accuracy<br>
+• Mobile notifications
 </p>
 `;
 }
