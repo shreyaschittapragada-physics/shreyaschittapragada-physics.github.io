@@ -2,20 +2,21 @@
 <html>
 <head>
 <title>Goals</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{margin:0;font-family:Segoe UI;background:#070b14;color:#e5e7eb;}
 
 nav{
-position:sticky;top:0;background:rgba(17,24,39,0.7);
-backdrop-filter:blur(14px);
-display:flex;justify-content:center;gap:20px;padding:14px;
+position:fixed;top:14px;left:50%;transform:translateX(-50%);
+display:flex;gap:22px;padding:10px 18px;
+background:rgba(17,24,39,0.55);
+backdrop-filter:blur(18px);
+border-radius:999px;
 }
 
 nav a{color:#93c5fd;text-decoration:none;}
 
-section{max-width:900px;margin:auto;padding:80px 20px;}
+section{max-width:900px;margin:auto;padding:100px 20px;}
 
 .card{
 background:#111827;
@@ -25,13 +26,11 @@ border:1px solid #1f2937;
 margin-top:15px;
 }
 
-h2{color:#60a5fa;}
-
 .reveal{
 opacity:0;
-transform:translateY(40px) scale(0.98);
-filter:blur(6px);
-transition:all 0.9s ease;
+transform:translateY(50px) scale(0.97);
+filter:blur(8px);
+transition:all 1s cubic-bezier(0.2,0.8,0.2,1);
 }
 
 .reveal.active{
@@ -57,24 +56,24 @@ filter:blur(0);
 <h1 class="reveal">Goals</h1>
 
 <div class="card reveal">
-Physics (Astrophysics + Theoretical Physics)
+Astrophysics & Theoretical Physics
 </div>
 
 <div class="card reveal">
-MIT, Yale, Ivy League, IISc, and global physics programs
+MIT / Yale / Ivy League / IISc
 </div>
 
 <div class="card reveal">
-Research-level computational physics development
+Research-level physics & computation
 </div>
 
 </section>
 
 <script>
-const o=new IntersectionObserver(e=>{
+const observer=new IntersectionObserver(e=>{
 e.forEach(x=>{if(x.isIntersecting)x.target.classList.add("active")});
 });
-document.querySelectorAll(".reveal").forEach(e=>o.observe(e));
+document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));
 </script>
 
 </body>
