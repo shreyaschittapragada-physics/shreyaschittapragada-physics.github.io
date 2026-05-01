@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Projects | Shreyas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
@@ -14,8 +13,21 @@
 
         header {
             text-align: center;
-            padding: 50px;
+            padding: 60px;
             background: #1e3a8a;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            padding: 14px;
+            background: #111827;
+        }
+
+        nav a {
+            color: #93c5fd;
+            text-decoration: none;
         }
 
         .container {
@@ -36,8 +48,6 @@
             color: #93c5fd;
             font-size: 13px;
         }
-
-        a { color: #93c5fd; text-decoration: none; }
     </style>
 </head>
 
@@ -47,30 +57,25 @@
     <h1>Projects</h1>
 </header>
 
+<nav>
+    <a href="index.html">Home</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="projects.html">Projects</a>
+    <a href="goals.html">Goals</a>
+</nav>
+
 <div class="container">
 
 <div class="card">
-    <h2>Smart Drainage Overflow Detection System</h2>
-    <p class="tag">Arduino • GSM • Sensors • Embedded Systems</p>
-
-    <p>
-        Designed a real-time water overflow detection system using ultrasonic sensors.
-        Implemented I2C-based communication between microcontrollers and GSM-based SMS alerts.
-    </p>
-
-    <p><b>Key Idea:</b> Converting physical sensing into real-time actionable alerts.</p>
+    <h2>Smart Drainage Overflow System</h2>
+    <p class="tag">Arduino • GSM • Sensors</p>
+    <p>Real-time overflow detection using ultrasonic sensors and GSM alerts with I2C communication.</p>
 </div>
 
 <div class="card">
     <h2>Viksit Bharat Buildathon 2026</h2>
-    <p class="tag">Innovation • Problem Solving</p>
-
-    <p>
-        Participated in a national innovation challenge focused on real-world problem solving and prototyping.
-    </p>
+    <p>National-level innovation challenge focused on real-world problem solving.</p>
 </div>
-
-<p><a href="index.html">← Back Home</a></p>
 
 </div>
 
