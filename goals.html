@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{margin:0;font-family:Segoe UI;background:#0a0f1c;color:#e5e7eb;}
+body{margin:0;font-family:Segoe UI;background:#070b14;color:#e5e7eb;}
 
 nav{
-position:sticky;top:0;background:rgba(17,24,39,0.75);
+position:sticky;top:0;background:rgba(17,24,39,0.7);
 backdrop-filter:blur(14px);
 display:flex;justify-content:center;gap:20px;padding:14px;
 }
@@ -18,14 +18,27 @@ nav a{color:#93c5fd;text-decoration:none;}
 section{max-width:900px;margin:auto;padding:80px 20px;}
 
 .card{
-background:#111827;padding:18px;border-radius:14px;
-border:1px solid #1f2937;margin-top:15px;
+background:#111827;
+padding:18px;
+border-radius:14px;
+border:1px solid #1f2937;
+margin-top:15px;
 }
 
 h2{color:#60a5fa;}
 
-.reveal{opacity:0;transform:translateY(30px);transition:0.8s;}
-.reveal.active{opacity:1;transform:translateY(0);}
+.reveal{
+opacity:0;
+transform:translateY(40px) scale(0.98);
+filter:blur(6px);
+transition:all 0.9s ease;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0) scale(1);
+filter:blur(0);
+}
 </style>
 </head>
 
@@ -36,6 +49,7 @@ h2{color:#60a5fa;}
 <a href="achievements.html">Achievements</a>
 <a href="projects.html">Projects</a>
 <a href="goals.html">Goals</a>
+<a href="blog.html">Blog</a>
 </nav>
 
 <section>
@@ -43,15 +57,15 @@ h2{color:#60a5fa;}
 <h1 class="reveal">Goals</h1>
 
 <div class="card reveal">
-Pursue Physics with focus on Astrophysics and Theoretical Physics.
+Physics (Astrophysics + Theoretical Physics)
 </div>
 
 <div class="card reveal">
-Target MIT, Ivy League universities and top global physics programs.
+MIT, Yale, Ivy League, IISc, and global physics programs
 </div>
 
 <div class="card reveal">
-Develop research-level computational and analytical physics skills.
+Research-level computational physics development
 </div>
 
 </section>
