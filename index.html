@@ -5,23 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+        /* ===== BASE ===== */
         body {
             margin: 0;
-            font-family: "Segoe UI", Arial;
-            background: #0a0f1c;
+            font-family: "Segoe UI", sans-serif;
+            background: #070b14;
             color: #e5e7eb;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
+        /* ===== NAV (GLASS) ===== */
         nav {
-            position: sticky;
+            position: fixed;
             top: 0;
-            background: rgba(17, 24, 39, 0.75);
-            backdrop-filter: blur(14px);
+            width: 100%;
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(16px);
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 24px;
             padding: 14px;
+            z-index: 1000;
             border-bottom: 1px solid #1f2937;
         }
 
@@ -29,41 +33,111 @@
             color: #93c5fd;
             text-decoration: none;
             font-size: 14px;
+            transition: 0.2s;
         }
 
-        nav a:hover { color: white; }
+        nav a:hover {
+            color: white;
+            transform: scale(1.05);
+        }
 
+        /* ===== HERO (PARALLAX STYLE) ===== */
         .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
             text-align: center;
-            padding: 140px 20px;
-            background: radial-gradient(circle at top, #1e3a8a, #0a0f1c 70%);
+            background: radial-gradient(circle at top, #1e3a8a, #070b14 70%);
+            position: relative;
         }
 
-        h1 { font-size: 44px; margin: 0; }
-        h2 { color: #60a5fa; }
+        .hero h1 {
+            font-size: 52px;
+            margin: 0;
+        }
 
+        .hero p {
+            color: #cbd5e1;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        /* floating glow */
+        .glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(59,130,246,0.2);
+            filter: blur(100px);
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        /* ===== SECTIONS ===== */
         section {
-            max-width: 900px;
+            max-width: 1000px;
             margin: auto;
-            padding: 80px 20px;
+            padding: 90px 20px;
         }
 
+        h2 {
+            color: #60a5fa;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        /* ===== GRID ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== CARD SYSTEM ===== */
         .card {
-            background: #111827;
-            padding: 18px;
-            border-radius: 14px;
+            background: linear-gradient(145deg, #111827, #0b1220);
             border: 1px solid #1f2937;
+            padding: 18px;
+            border-radius: 16px;
+            transition: all 0.4s ease;
         }
 
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border-color: #3b82f6;
+        }
+
+        /* ===== TIMELINE STYLE ===== */
+        .timeline {
+            border-left: 2px solid #1f2937;
+            padding-left: 20px;
+        }
+
+        .item {
+            margin-bottom: 20px;
+        }
+
+        /* ===== ANIMATION ===== */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            transform: translateY(40px) scale(0.98);
+            filter: blur(6px);
+            transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         .reveal.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+            filter: blur(0);
         }
     </style>
 </head>
@@ -71,30 +145,98 @@
 <body>
 
 <nav>
-    <a href="index.html">Home</a>
-    <a href="achievements.html">Achievements</a>
-    <a href="projects.html">Projects</a>
-    <a href="goals.html">Goals</a>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#projects">Projects</a>
+    <a href="#goals">Goals</a>
 </nav>
 
-<div class="hero reveal">
+<!-- HERO -->
+<div class="hero reveal" id="home">
+    <div class="glow"></div>
     <h1>Astrophysics & Physics</h1>
-    <p>Shreyas | Theoretical Physics • Engineering • Computational Thinking</p>
+    <p>Engineering • Theoretical Thinking • Computational Physics</p>
 </div>
 
-<section class="reveal">
+<!-- ABOUT -->
+<section id="about" class="reveal">
+    <h2>About</h2>
     <div class="card">
-        Exploring physics through real-world engineering, computation, and astrophysical thinking.
+        Passionate about astrophysics, theoretical physics, and engineering systems.
+        Focused on building real-world problem-solving skills through computation and experimentation.
     </div>
 </section>
 
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="reveal">
+    <h2>Achievements</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>🏆 Awards</h3>
+            <p>Best All-Rounder Award – School</p>
+            <p>IEO Merit (Level 2) – Twice</p>
+            <p>Top ~100 – VSSF</p>
+        </div>
+
+        <div class="card">
+            <h3>📌 Participation</h3>
+            <p>CBSE Science Exhibition</p>
+            <p>Buildathon 2026</p>
+            <p>CBSE Zonal Football</p>
+            <p>NCC Cadet</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="reveal">
+    <h2>Projects</h2>
+
+    <div class="card">
+        <h3>Smart Drainage System</h3>
+        <p>Arduino + GSM + ultrasonic sensing + I2C communication system for flood detection.</p>
+    </div>
+
+    <div class="card">
+        <h3>Innovation Prototype</h3>
+        <p>National-level engineering problem-solving project.</p>
+    </div>
+</section>
+
+<!-- GOALS -->
+<section id="goals" class="reveal">
+    <h2>Goals</h2>
+
+    <div class="card">
+        Pursue Physics (Astrophysics + Theoretical Physics).
+    </div>
+
+    <div class="card">
+        Target MIT, Yale, Ivy League, and top global physics programs.
+    </div>
+
+    <div class="card">
+        Build research-level computational physics skills.
+    </div>
+</section>
+
+<!-- ANIMATION SCRIPT -->
 <script>
 const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add("active");
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+        }
     });
+}, { threshold: 0.1 });
+
+document.querySelectorAll(".reveal").forEach(el => {
+    observer.observe(el);
 });
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 </script>
 
 </body>
