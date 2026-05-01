@@ -1,42 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Projects</title>
+<title>Projects | Shreyas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{margin:0;font-family:Segoe UI;background:#070b14;color:#e5e7eb;}
-
-nav{
-position:fixed;top:14px;left:50%;transform:translateX(-50%);
-display:flex;gap:22px;padding:10px 18px;
-background:rgba(17,24,39,0.55);
-backdrop-filter:blur(18px);
-border-radius:999px;
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #070b14;
+    color: #e5e7eb;
+    overflow-x: hidden;
 }
 
-nav a{color:#93c5fd;text-decoration:none;}
-
-section{max-width:900px;margin:auto;padding:100px 20px;}
-
-.card{
-background:#111827;
-padding:18px;
-border-radius:14px;
-border:1px solid #1f2937;
-margin-top:15px;
+/* NAV */
+nav {
+    position: fixed;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 22px;
+    padding: 10px 18px;
+    background: rgba(17, 24, 39, 0.55);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 999px;
+    z-index: 1000;
 }
 
-.reveal{
-opacity:0;
-transform:translateY(50px) scale(0.97);
-filter:blur(8px);
-transition:all 1s cubic-bezier(0.2,0.8,0.2,1);
+nav a {
+    color: #93c5fd;
+    text-decoration: none;
+    font-size: 14px;
 }
 
-.reveal.active{
-opacity:1;
-transform:translateY(0) scale(1);
-filter:blur(0);
+nav a:hover {
+    color: white;
+}
+
+/* SECTION */
+section {
+    max-width: 900px;
+    margin: auto;
+    padding: 110px 20px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+/* CARDS */
+.card {
+    background: linear-gradient(145deg,#111827,#0b1220);
+    padding: 18px;
+    border-radius: 16px;
+    border: 1px solid #1f2937;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.35s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #3b82f6;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.55);
+}
+
+h2 {
+    color: #60a5fa;
+}
+
+/* REVEAL */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px) scale(0.97);
+    filter: blur(10px);
+    transition: all 1s cubic-bezier(0.2,0.8,0.2,1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+}
+
+.modal-content {
+    background: #111827;
+    margin: 8% auto;
+    padding: 22px;
+    width: 85%;
+    max-width: 700px;
+    border-radius: 16px;
+    border: 1px solid #1f2937;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 26px;
+    color: #93c5fd;
+}
+
+pre {
+    background: #0b1220;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #1f2937;
+    overflow-x: auto;
 }
 </style>
 </head>
@@ -55,21 +137,99 @@ filter:blur(0);
 
 <h1 class="reveal">Projects</h1>
 
-<div class="card reveal">
-Smart Drainage System (Arduino + GSM + I2C)
+<div class="card reveal" onclick="openProject('drainage')">
+    <h2>Smart Drainage System</h2>
+    <p>Arduino + HC-SR04 + GSM + I2C</p>
 </div>
 
-<div class="card reveal">
-Buildathon Innovation Project
+<div class="card reveal" onclick="openProject('earthquake')">
+    <h2>Earthquake Detection System</h2>
+    <p>Arduino + Vibration Sensor (SW-420)</p>
 </div>
 
 </section>
 
+<!-- MODAL -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
 <script>
-const observer=new IntersectionObserver(e=>{
-e.forEach(x=>{if(x.isIntersecting)x.target.classList.add("active")});
-});
-document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));
+
+/* REVEAL ANIMATION */
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add("active");
+            }, i * 80);
+        }
+    });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+/* MODAL LOGIC */
+function openProject(type) {
+    let content = "";
+
+    if (type === "drainage") {
+        content = `
+        <h2>Smart Drainage System</h2>
+        <p><b>Purpose:</b> Detects water overflow in real-time and sends alerts.</p>
+
+        <p><b>Components:</b></p>
+        <ul>
+            <li>Arduino UNO</li>
+            <li>HC-SR04 Ultrasonic Sensor</li>
+            <li>SIM900A GSM Module</li>
+            <li>I2C Communication</li>
+            <li>Buzzer</li>
+        </ul>
+
+        <p><b>Working Flow:</b></p>
+        <pre>
+Water Level → HC-SR04 → Arduino → GSM SMS Alert
+                              ↓
+                           Buzzer
+        </pre>
+
+        <p><b>Impact:</b> Smart flood prevention system for urban drainage monitoring.</p>
+        `;
+    }
+
+    if (type === "earthquake") {
+        content = `
+        <h2>Earthquake Detection System</h2>
+        <p><b>Purpose:</b> Detects seismic vibrations and triggers emergency alerts.</p>
+
+        <p><b>Components:</b></p>
+        <ul>
+            <li>Arduino UNO</li>
+            <li>SW-420 Vibration Sensor</li>
+            <li>Buzzer</li>
+        </ul>
+
+        <p><b>Working Flow:</b></p>
+        <pre>
+Ground Vibration → Sensor → Arduino → Alarm Trigger
+        </pre>
+
+        <p><b>Impact:</b> Early warning prototype for disaster detection systems.</p>
+        `;
+    }
+
+    document.getElementById("modal-body").innerHTML = content;
+    document.getElementById("modal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
 </script>
 
 </body>
