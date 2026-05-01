@@ -1,102 +1,142 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Shreyas | Physics Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreyas | Physics Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: "Segoe UI", sans-serif;
-            background: #070b14;
-            color: #e5e7eb;
-            overflow-x: hidden;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #070b14;
+    color: #e5e7eb;
+    overflow-x: hidden;
+}
 
-        nav {
-            position: sticky;
-            top: 0;
-            background: rgba(17, 24, 39, 0.7);
-            backdrop-filter: blur(14px);
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 14px;
-            border-bottom: 1px solid #1f2937;
-        }
+/* NAV */
+nav {
+    position: fixed;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 22px;
+    padding: 10px 18px;
+    background: rgba(17, 24, 39, 0.55);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 999px;
+    z-index: 1000;
+}
 
-        nav a {
-            color: #93c5fd;
-            text-decoration: none;
-        }
+nav a {
+    color: #93c5fd;
+    text-decoration: none;
+    font-size: 14px;
+    position: relative;
+}
 
-        nav a:hover { color: white; }
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background: #60a5fa;
+    transition: 0.3s;
+}
 
-        .hero {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            background: radial-gradient(circle at top, #1e3a8a, #070b14 70%);
-        }
+nav a:hover::after { width: 100%; }
+nav a:hover { color: white; }
 
-        h1 { font-size: 48px; margin: 0; }
+/* HERO */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    background: radial-gradient(circle at top, #1e3a8a, #070b14 70%);
+    position: relative;
+}
 
-        section {
-            max-width: 900px;
-            margin: auto;
-            padding: 80px 20px;
-        }
+.glow {
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    background: rgba(59,130,246,0.22);
+    filter: blur(120px);
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
-        .card {
-            background: #111827;
-            padding: 18px;
-            border-radius: 14px;
-            border: 1px solid #1f2937;
-            margin-top: 15px;
-        }
+/* REVEAL */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px) scale(0.97);
+    filter: blur(8px);
+    transition: all 1s cubic-bezier(0.2,0.8,0.2,1);
+}
 
-        /* REVEAL */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px) scale(0.98);
-            filter: blur(6px);
-            transition: all 0.9s ease;
-        }
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
-        }
-    </style>
+section {
+    max-width: 900px;
+    margin: auto;
+    padding: 80px 20px;
+}
+
+.card {
+    background: #111827;
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid #1f2937;
+    margin-top: 15px;
+}
+</style>
 </head>
 
 <body>
 
 <nav>
-    <a href="index.html">Home</a>
-    <a href="achievements.html">Achievements</a>
-    <a href="projects.html">Projects</a>
-    <a href="goals.html">Goals</a>
-    <a href="blog.html">Blog</a>
+<a href="index.html">Home</a>
+<a href="achievements.html">Achievements</a>
+<a href="projects.html">Projects</a>
+<a href="goals.html">Goals</a>
+<a href="blog.html">Blog</a>
 </nav>
 
 <div class="hero reveal">
-    <h1>Astrophysics & Physics</h1>
-    <p>Shreyas | Theoretical Physics • Engineering • Computational Thinking</p>
+<div class="glow"></div>
+<h1 id="typing"></h1>
+<p>Physics • Astrophysics • Computational Thinking</p>
 </div>
 
 <section class="reveal">
-    <div class="card">
-        Exploring physics through computation, engineering, and astrophysical thinking.
-    </div>
+<div class="card">
+Exploring physics through computation, engineering, and astrophysical thinking.
+</div>
 </section>
 
 <script>
-const observer = new IntersectionObserver(e=>{
+const text="Astrophysics & Physics";
+let i=0;
+function type(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,75);
+}}
+type();
+
+const observer=new IntersectionObserver(e=>{
 e.forEach(x=>{
 if(x.isIntersecting)x.target.classList.add("active");
 });
