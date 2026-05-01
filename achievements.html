@@ -47,13 +47,19 @@ section {
     border: 1px solid #1f2937;
     margin-top: 15px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
+/* 🔥 Glow hover */
 .card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-6px) scale(1.01);
     border-color: #3b82f6;
+    box-shadow: 0 10px 30px rgba(59,130,246,0.25);
 }
+
+/* HEADINGS */
+h2 { color: #60a5fa; }
+h3 { color: #93c5fd; margin-top: 18px; }
 
 /* MODAL */
 .modal {
@@ -79,31 +85,34 @@ section {
     cursor: pointer;
 }
 
-/* TEXT */
-h2 { color: #60a5fa; }
-h3 { color: #93c5fd; margin-top: 18px; }
-
-pre {
-    background: #020617;
-    padding: 12px;
-    border-radius: 8px;
-}
-
-ul {
-    line-height: 1.8;
-    padding-left: 18px;
-}
-
-ul li {
-    margin-bottom: 10px;
-}
-
 /* IMAGE */
 img {
     width: 100%;
     max-width: 750px;
     border-radius: 12px;
     margin-top: 10px;
+}
+
+/* LIST */
+.participation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.participation-item {
+    background: #020617;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #1f2937;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.participation-item:hover {
+    border-color: #60a5fa;
+    background: #0b1220;
 }
 </style>
 </head>
@@ -119,37 +128,49 @@ img {
 
 <h1>Projects</h1>
 
+<!-- PROJECTS -->
 <div class="card" onclick="openProject('drainage')">
-<h2>Smart Drainage System</h2>
+<h2>⚙️ Smart Drainage System</h2>
 <p>Dual Arduino + I2C + Ultrasonic + GSM</p>
 </div>
 
 <div class="card" onclick="openProject('earthquake')">
-<h2>Earthquake Detection System</h2>
+<h2>🌍 Earthquake Detection System</h2>
 <p>Arduino + Vibration Sensor</p>
 </div>
 
-<!-- PARTICIPATION SECTION -->
+<!-- PARTICIPATION -->
 <div class="card">
-<h2>📌 Participation</h2>
+<h2>🏆 Participation</h2>
 
-<ul>
-<li><b>CBSE Science Exhibition</b><br>
-Arduino-based project using I2C communication</li>
+<div class="participation-list">
 
-<li><b>Viksit Bharat Buildathon 2025</b><br>
-Innovation-focused national-level participation</li>
+<div class="participation-item" onclick="openProject('science')">
+⚙️ <b>CBSE Science Exhibition</b><br>
+Arduino + I2C Project
+</div>
 
-<li><b>Milletutopia – Inter-School Skit (HCU)</b><br>
-Sustainability awareness through performance</li>
+<div class="participation-item" onclick="openProject('buildathon')">
+🏆 <b>Viksit Bharat Buildathon 2025</b><br>
+Innovation Event
+</div>
 
-<li><b>CBSE Zonal Clusters</b><br>
-Represented school in Football</li>
+<div class="participation-item" onclick="openProject('millet')">
+🎭 <b>Milletutopia – Skit (HCU)</b><br>
+Sustainability Performance
+</div>
 
-<li><b>NCC Cadet</b><br>
-"A" Certificate (2024–2026)</li>
-</ul>
+<div class="participation-item" onclick="openProject('football')">
+⚽ <b>CBSE Zonal Clusters</b><br>
+Football Representation
+</div>
 
+<div class="participation-item" onclick="openProject('ncc')">
+🎖️ <b>NCC Cadet</b><br>
+"A" Certificate (2024–2026)
+</div>
+
+</div>
 </div>
 
 </section>
@@ -168,73 +189,59 @@ function openProject(type){
 
 let content="";
 
+/* PROJECTS */
+
 if(type==="drainage"){
 content=`
-<h2>Smart Drainage System (Dual Arduino - I2C)</h2>
-
-<p>
-An intelligent drainage monitoring system that detects water overflow levels 
-using ultrasonic sensing and sends alerts via GSM.
-</p>
-
-<h3>System Architecture</h3>
-<p>
-• Slave Arduino → Water level sensing<br>
-• Master Arduino → Processing + GSM alerts<br>
-• Communication → I2C protocol
-</p>
-
-<h3>Circuit Diagram</h3>
-<div style="text-align:center;">
-<img src="images/drainage.png">
-</div>
-
-<h3>Pin Connections</h3>
-<pre>
-Ultrasonic → Slave Arduino
-TRIG → D9
-ECHO → D10
-
-I2C:
-SDA → A4
-SCL → A5
-
-GSM → Master Arduino
-TX → D7
-RX → D6
-</pre>
-
-<h3>Working Principle</h3>
-<p>
-Water level is continuously measured and transmitted via I2C.
-When threshold is exceeded, alerts are triggered.
-</p>
+<h2>Smart Drainage System</h2>
+<p>Dual Arduino system using I2C communication to monitor water level and send GSM alerts.</p>
 `;
 }
 
 if(type==="earthquake"){
 content=`
 <h2>Earthquake Detection System</h2>
+<p>Detects vibration using sensor and alerts via buzzer.</p>
+`;
+}
 
-<p>
-A vibration-based alert system that detects ground movement and triggers warnings.
-</p>
+/* PARTICIPATION */
 
-<h3>Circuit Diagram</h3>
-<div style="text-align:center;">
-<img src="images/earthquake.png">
-</div>
+if(type==="science"){
+content=`
+<h2>CBSE Science Exhibition</h2>
+<p>Presented an Arduino-based system using I2C communication demonstrating multi-controller architecture.</p>
+`;
+}
 
-<h3>Pin Connections</h3>
-<pre>
-Sensor → D2
-Buzzer → D8
-</pre>
+if(type==="buildathon"){
+content=`
+<h2>Viksit Bharat Buildathon 2025</h2>
+<p>Participated in a national-level innovation challenge focused on problem-solving and technology development.</p>
+`;
+}
 
-<h3>Working Principle</h3>
-<p>
-Sensor detects vibration → Arduino processes → buzzer alerts.
-</p>
+if(type==="millet"){
+content=`
+<h2>Milletutopia – Skit (HCU)</h2>
+<p>Performed in an inter-school skit promoting sustainable food systems and millet awareness.</p>
+
+<h3>Skills Gained</h3>
+<p>Public speaking, teamwork, creativity, sustainability awareness.</p>
+`;
+}
+
+if(type==="football"){
+content=`
+<h2>CBSE Zonal Clusters – Football</h2>
+<p>Represented school in inter-school football competition.</p>
+`;
+}
+
+if(type==="ncc"){
+content=`
+<h2>NCC Cadet</h2>
+<p>Pursuing "A" Certificate (2024–2026), developing discipline, leadership, and physical training.</p>
 `;
 }
 
