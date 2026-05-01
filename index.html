@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Shreyas | Physics Blog</title>
-
+    <title>Shreyas | Physics Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
             margin: 0;
             font-family: "Segoe UI", Arial, sans-serif;
-            background: #0f172a;
-            color: #e2e8f0;
+            background: #0b1220;
+            color: #e5e7eb;
         }
 
         header {
+            padding: 70px 20px;
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #1e3a8a, #0f172a);
+            background: radial-gradient(circle at top, #1e3a8a, #0b1220 70%);
         }
 
         header h1 {
@@ -25,9 +24,28 @@
         }
 
         header p {
-            margin-top: 10px;
             color: #cbd5e1;
-            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background: #111827;
+            position: sticky;
+            top: 0;
+        }
+
+        nav a {
+            color: #93c5fd;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: white;
         }
 
         .container {
@@ -37,39 +55,36 @@
         }
 
         h2 {
-            color: #93c5fd;
-            margin-bottom: 10px;
+            color: #60a5fa;
+            border-left: 4px solid #2563eb;
+            padding-left: 10px;
+            margin-top: 50px;
         }
 
         .card {
-            background: #1e293b;
-            padding: 20px;
-            margin-top: 15px;
+            background: #111827;
+            padding: 16px;
+            margin-top: 12px;
             border-radius: 12px;
+            border: 1px solid #1f2937;
             transition: 0.2s;
         }
 
         .card:hover {
             transform: translateY(-3px);
-            background: #273449;
-        }
-
-        a {
-            color: #60a5fa;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        p {
-            color: #cbd5e1;
-            line-height: 1.6;
+            border-color: #3b82f6;
         }
 
         footer {
             text-align: center;
             padding: 30px;
-            color: #64748b;
-            font-size: 14px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        a {
+            color: #93c5fd;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -78,35 +93,75 @@
 
 <header>
     <h1>Shreyas</h1>
-    <p>Exploring physics through curiosity, equations, and ideas</p>
+    <p>Physics • Engineering • Computational Thinking</p>
 </header>
+
+<nav>
+    <a href="#achievements">Achievements</a>
+    <a href="#projects">Projects</a>
+    <a href="#blog">Blog</a>
+    <a href="#goals">Goals</a>
+    <a href="#skills">Skills</a>
+</nav>
 
 <div class="container">
 
-    <h2>About</h2>
-    <p>
-        I’m a high school student passionate about astrophysics and theoretical physics.
-        This blog is where I explore ideas, break down concepts, and think deeply about how the universe works.
-    </p>
+    <!-- ACHIEVEMENTS -->
+    <h2 id="achievements">Achievements</h2>
 
-    <h2>Blog</h2>
+    <div class="card">🏆 Best All-Rounder Award (Academics + Sports + Leadership)</div>
+    <div class="card">🏅 Top ~100 – VSSF National Science Competition</div>
+    <div class="card">⚽ CBSE Zonal Football (U-19, 3 years participation)</div>
+    <div class="card">🥈 Runner-up – Interschool Football Tournament</div>
+    <div class="card">🪖 NCC Cadet (2024–2026)</div>
+
+    <!-- PROJECTS -->
+    <h2 id="projects">Projects</h2>
 
     <div class="card">
-        <a href="post1.html"><b>Why Simple Harmonic Motion is Only an Approximation</b></a>
-        <p>Understanding where ideal motion models break down in the real world.</p>
+        <b>Smart Drainage Overflow Detection System</b>
+        <p>Arduino-based system using ultrasonic sensors + GSM alerts + I2C communication.</p>
     </div>
 
-    <h2>Projects</h2>
+    <div class="card">
+        <b>Viksit Bharat Buildathon 2026</b>
+        <p>National innovation challenge focused on real-world problem solving and prototyping.</p>
+    </div>
+
+    <!-- BLOG -->
+    <h2 id="blog">Blog / Thinking</h2>
 
     <div class="card">
-        <b>Oscillations Experiment</b>
-        <p>Studying real motion vs theoretical SHM using data and analysis (coming soon).</p>
+        <a href="post1.html">Why Simple Harmonic Motion is Only an Approximation</a>
+        <p>Exploring where ideal physics models break in real systems.</p>
+    </div>
+
+    <!-- GOALS -->
+    <h2 id="goals">Goals</h2>
+
+    <div class="card">
+        Deepen understanding of theoretical physics and astrophysics through self-study and projects.
+    </div>
+
+    <div class="card">
+        Build computational physics skills (simulation, modeling, data analysis).
+    </div>
+
+    <div class="card">
+        Prepare for advanced physics pathways (IISER / IISc / global universities).
+    </div>
+
+    <!-- SKILLS -->
+    <h2 id="skills">Skills</h2>
+
+    <div class="card">
+        Arduino • C/C++ Basics • Sensors • GSM Modules • Problem Solving • Physics Modeling
     </div>
 
 </div>
 
 <footer>
-    © 2026 Shreyas | Physics Blog
+    © 2026 Shreyas | Physics Portfolio
 </footer>
 
 </body>
