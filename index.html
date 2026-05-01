@@ -7,54 +7,68 @@
     <style>
         body {
             margin: 0;
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: #0b1220;
+            font-family: "Segoe UI", Arial;
+            background: #0a0f1c;
             color: #e5e7eb;
+            scroll-behavior: smooth;
         }
-
-        header {
-            text-align: center;
-            padding: 80px 20px;
-            background: radial-gradient(circle at top, #1e3a8a, #0b1220 70%);
-        }
-
-        h1 { margin: 0; font-size: 42px; }
-        header p { color: #cbd5e1; margin-top: 10px; }
 
         nav {
+            position: sticky;
+            top: 0;
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(14px);
             display: flex;
             justify-content: center;
-            gap: 18px;
+            gap: 20px;
             padding: 14px;
-            background: #111827;
+            border-bottom: 1px solid #1f2937;
         }
 
         nav a {
             color: #93c5fd;
             text-decoration: none;
+            font-size: 14px;
         }
 
-        .container {
+        nav a:hover { color: white; }
+
+        .hero {
+            text-align: center;
+            padding: 140px 20px;
+            background: radial-gradient(circle at top, #1e3a8a, #0a0f1c 70%);
+        }
+
+        h1 { font-size: 44px; margin: 0; }
+        h2 { color: #60a5fa; }
+
+        section {
             max-width: 900px;
             margin: auto;
-            padding: 40px 20px;
+            padding: 80px 20px;
         }
 
         .card {
             background: #111827;
             padding: 18px;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid #1f2937;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 
 <body>
-
-<header>
-    <h1>Shreyas</h1>
-    <p>Physics • Engineering • Computational Thinking</p>
-</header>
 
 <nav>
     <a href="index.html">Home</a>
@@ -63,13 +77,25 @@
     <a href="goals.html">Goals</a>
 </nav>
 
-<div class="container">
-
-    <div class="card">
-        Physics portfolio exploring astrophysics, theoretical physics, and engineering-based problem solving.
-    </div>
-
+<div class="hero reveal">
+    <h1>Astrophysics & Physics</h1>
+    <p>Shreyas | Theoretical Physics • Engineering • Computational Thinking</p>
 </div>
+
+<section class="reveal">
+    <div class="card">
+        Exploring physics through real-world engineering, computation, and astrophysical thinking.
+    </div>
+</section>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("active");
+    });
+});
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
