@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Achievements</title>
+<title>Projects | Shreyas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
@@ -23,25 +24,19 @@ nav {
     background: rgba(17, 24, 39, 0.55);
     backdrop-filter: blur(18px);
     border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.08);
+    z-index: 1000;
 }
 
-/* LAYOUT */
+nav a {
+    color: #93c5fd;
+    text-decoration: none;
+}
+
+/* SECTION */
 section {
-    max-width: 950px;
+    max-width: 900px;
     margin: auto;
-    padding: 100px 20px;
-}
-
-h1 {
-    font-size: 36px;
-}
-
-/* GRID */
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    padding: 110px 20px;
 }
 
 /* CARD */
@@ -50,35 +45,65 @@ h1 {
     padding: 18px;
     border-radius: 16px;
     border: 1px solid #1f2937;
-    transition: 0.35s;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.55);
+    transform: translateY(-6px);
     border-color: #3b82f6;
 }
 
-h2 {
-    color: #60a5fa;
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
 }
 
-/* REVEAL */
-.reveal {
-    opacity: 0;
-    transform: translateY(60px) scale(0.97);
-    filter: blur(10px);
-    transition: all 1.1s cubic-bezier(0.2,0.8,0.2,1);
+.modal-content {
+    background: #111827;
+    margin: 5% auto;
+    padding: 25px;
+    width: 90%;
+    max-width: 900px;
+    border-radius: 16px;
 }
 
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
+.close {
+    float: right;
+    font-size: 26px;
+    cursor: pointer;
 }
 
-@media(max-width:768px){
-    .grid{grid-template-columns:1fr;}
+/* TEXT */
+h2 { color: #60a5fa; }
+h3 { color: #93c5fd; margin-top: 18px; }
+
+pre {
+    background: #020617;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+ul {
+    line-height: 1.8;
+    padding-left: 18px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+/* IMAGE */
+img {
+    width: 100%;
+    max-width: 750px;
+    border-radius: 12px;
+    margin-top: 10px;
 }
 </style>
 </head>
@@ -87,31 +112,28 @@ h2 {
 
 <nav>
 <a href="index.html">Home</a>
-<a href="achievements.html">Achievements</a>
 <a href="projects.html">Projects</a>
-<a href="goals.html">Goals</a>
-<a href="blog.html">Blog</a>
 </nav>
 
 <section>
 
-<h1 class="reveal">Achievements</h1>
+<h1>Projects</h1>
 
-<div class="grid">
-
-<div class="card reveal">
-<h2>🏆 Awards</h2>
-<p>Best All-Rounder Award</p>
-<p>IEO Merit (Level 2)</p>
-<p>Top 100 Nationwide – VSSF: Research exposure internship affiliated with IISER Pune & NCL Pune</p>
-<p>Football Runner-up</p>
+<div class="card" onclick="openProject('drainage')">
+<h2>Smart Drainage System</h2>
+<p>Dual Arduino + I2C + Ultrasonic + GSM</p>
 </div>
 
-<div class="card reveal">
+<div class="card" onclick="openProject('earthquake')">
+<h2>Earthquake Detection System</h2>
+<p>Arduino + Vibration Sensor</p>
+</div>
+
+<!-- PARTICIPATION SECTION -->
+<div class="card">
 <h2>📌 Participation</h2>
 
-<ul style="line-height:1.8; padding-left:18px;">
-
+<ul>
 <li><b>CBSE Science Exhibition</b><br>
 Arduino-based project using I2C communication</li>
 
@@ -126,22 +148,104 @@ Represented school in Football</li>
 
 <li><b>NCC Cadet</b><br>
 "A" Certificate (2024–2026)</li>
-
 </ul>
+
 </div>
 
 </section>
 
-<script>
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add("active"), i * 90);
-        }
-    });
-}, { threshold: 0.12 });
+<!-- MODAL -->
+<div id="modal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">&times;</span>
+<div id="modal-body"></div>
+</div>
+</div>
 
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+<script>
+
+function openProject(type){
+
+let content="";
+
+if(type==="drainage"){
+content=`
+<h2>Smart Drainage System (Dual Arduino - I2C)</h2>
+
+<p>
+An intelligent drainage monitoring system that detects water overflow levels 
+using ultrasonic sensing and sends alerts via GSM.
+</p>
+
+<h3>System Architecture</h3>
+<p>
+• Slave Arduino → Water level sensing<br>
+• Master Arduino → Processing + GSM alerts<br>
+• Communication → I2C protocol
+</p>
+
+<h3>Circuit Diagram</h3>
+<div style="text-align:center;">
+<img src="images/drainage.png">
+</div>
+
+<h3>Pin Connections</h3>
+<pre>
+Ultrasonic → Slave Arduino
+TRIG → D9
+ECHO → D10
+
+I2C:
+SDA → A4
+SCL → A5
+
+GSM → Master Arduino
+TX → D7
+RX → D6
+</pre>
+
+<h3>Working Principle</h3>
+<p>
+Water level is continuously measured and transmitted via I2C.
+When threshold is exceeded, alerts are triggered.
+</p>
+`;
+}
+
+if(type==="earthquake"){
+content=`
+<h2>Earthquake Detection System</h2>
+
+<p>
+A vibration-based alert system that detects ground movement and triggers warnings.
+</p>
+
+<h3>Circuit Diagram</h3>
+<div style="text-align:center;">
+<img src="images/earthquake.png">
+</div>
+
+<h3>Pin Connections</h3>
+<pre>
+Sensor → D2
+Buzzer → D8
+</pre>
+
+<h3>Working Principle</h3>
+<p>
+Sensor detects vibration → Arduino processes → buzzer alerts.
+</p>
+`;
+}
+
+document.getElementById("modal-body").innerHTML=content;
+document.getElementById("modal").style.display="block";
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
 </script>
 
 </body>
