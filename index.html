@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        /* ===== BASE ===== */
         body {
             margin: 0;
             font-family: "Segoe UI", sans-serif;
@@ -14,124 +13,57 @@
             overflow-x: hidden;
         }
 
-        /* ===== NAV (GLASS) ===== */
         nav {
-            position: fixed;
+            position: sticky;
             top: 0;
-            width: 100%;
-            background: rgba(17, 24, 39, 0.6);
-            backdrop-filter: blur(16px);
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(14px);
             display: flex;
             justify-content: center;
-            gap: 24px;
+            gap: 20px;
             padding: 14px;
-            z-index: 1000;
             border-bottom: 1px solid #1f2937;
         }
 
         nav a {
             color: #93c5fd;
             text-decoration: none;
-            font-size: 14px;
-            transition: 0.2s;
         }
 
-        nav a:hover {
-            color: white;
-            transform: scale(1.05);
-        }
+        nav a:hover { color: white; }
 
-        /* ===== HERO (PARALLAX STYLE) ===== */
         .hero {
             height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             flex-direction: column;
             text-align: center;
             background: radial-gradient(circle at top, #1e3a8a, #070b14 70%);
-            position: relative;
         }
 
-        .hero h1 {
-            font-size: 52px;
-            margin: 0;
-        }
+        h1 { font-size: 48px; margin: 0; }
 
-        .hero p {
-            color: #cbd5e1;
-            margin-top: 10px;
-            font-size: 16px;
-        }
-
-        /* floating glow */
-        .glow {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: rgba(59,130,246,0.2);
-            filter: blur(100px);
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 0;
-        }
-
-        /* ===== SECTIONS ===== */
         section {
-            max-width: 1000px;
+            max-width: 900px;
             margin: auto;
-            padding: 90px 20px;
+            padding: 80px 20px;
         }
 
-        h2 {
-            color: #60a5fa;
-            font-size: 26px;
-            margin-bottom: 15px;
-        }
-
-        /* ===== GRID ===== */
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-        }
-
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-        }
-
-        /* ===== CARD SYSTEM ===== */
         .card {
-            background: linear-gradient(145deg, #111827, #0b1220);
-            border: 1px solid #1f2937;
+            background: #111827;
             padding: 18px;
-            border-radius: 16px;
-            transition: all 0.4s ease;
+            border-radius: 14px;
+            border: 1px solid #1f2937;
+            margin-top: 15px;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            border-color: #3b82f6;
-        }
-
-        /* ===== TIMELINE STYLE ===== */
-        .timeline {
-            border-left: 2px solid #1f2937;
-            padding-left: 20px;
-        }
-
-        .item {
-            margin-bottom: 20px;
-        }
-
-        /* ===== ANIMATION ===== */
+        /* REVEAL */
         .reveal {
             opacity: 0;
             transform: translateY(40px) scale(0.98);
             filter: blur(6px);
-            transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: all 0.9s ease;
         }
 
         .reveal.active {
@@ -145,98 +77,31 @@
 <body>
 
 <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#achievements">Achievements</a>
-    <a href="#projects">Projects</a>
-    <a href="#goals">Goals</a>
+    <a href="index.html">Home</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="projects.html">Projects</a>
+    <a href="goals.html">Goals</a>
+    <a href="blog.html">Blog</a>
 </nav>
 
-<!-- HERO -->
-<div class="hero reveal" id="home">
-    <div class="glow"></div>
+<div class="hero reveal">
     <h1>Astrophysics & Physics</h1>
-    <p>Engineering • Theoretical Thinking • Computational Physics</p>
+    <p>Shreyas | Theoretical Physics • Engineering • Computational Thinking</p>
 </div>
 
-<!-- ABOUT -->
-<section id="about" class="reveal">
-    <h2>About</h2>
+<section class="reveal">
     <div class="card">
-        Passionate about astrophysics, theoretical physics, and engineering systems.
-        Focused on building real-world problem-solving skills through computation and experimentation.
+        Exploring physics through computation, engineering, and astrophysical thinking.
     </div>
 </section>
 
-<!-- ACHIEVEMENTS -->
-<section id="achievements" class="reveal">
-    <h2>Achievements</h2>
-
-    <div class="grid">
-
-        <div class="card">
-            <h3>🏆 Awards</h3>
-            <p>Best All-Rounder Award – School</p>
-            <p>IEO Merit (Level 2) – Twice</p>
-            <p>Top ~100 – VSSF</p>
-        </div>
-
-        <div class="card">
-            <h3>📌 Participation</h3>
-            <p>CBSE Science Exhibition</p>
-            <p>Buildathon 2026</p>
-            <p>CBSE Zonal Football</p>
-            <p>NCC Cadet</p>
-        </div>
-
-    </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="reveal">
-    <h2>Projects</h2>
-
-    <div class="card">
-        <h3>Smart Drainage System</h3>
-        <p>Arduino + GSM + ultrasonic sensing + I2C communication system for flood detection.</p>
-    </div>
-
-    <div class="card">
-        <h3>Innovation Prototype</h3>
-        <p>National-level engineering problem-solving project.</p>
-    </div>
-</section>
-
-<!-- GOALS -->
-<section id="goals" class="reveal">
-    <h2>Goals</h2>
-
-    <div class="card">
-        Pursue Physics (Astrophysics + Theoretical Physics).
-    </div>
-
-    <div class="card">
-        Target MIT, Yale, Ivy League, and top global physics programs.
-    </div>
-
-    <div class="card">
-        Build research-level computational physics skills.
-    </div>
-</section>
-
-<!-- ANIMATION SCRIPT -->
 <script>
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-        }
-    });
-}, { threshold: 0.1 });
-
-document.querySelectorAll(".reveal").forEach(el => {
-    observer.observe(el);
+const observer = new IntersectionObserver(e=>{
+e.forEach(x=>{
+if(x.isIntersecting)x.target.classList.add("active");
 });
+});
+document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));
 </script>
 
 </body>
