@@ -2,43 +2,74 @@
 <html>
 <head>
     <title>Shreyas | Physics Blog</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #f5f7fa;
-            color: #2c3e50;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
         }
 
         header {
-            background-color: #1e2a38;
-            color: white;
-            padding: 30px;
             text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1e3a8a, #0f172a);
         }
 
-        section {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
+        header h1 {
+            margin: 0;
+            font-size: 42px;
+        }
+
+        header p {
+            margin-top: 10px;
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
         }
 
         h2 {
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 5px;
-        }
-
-        a {
-            color: #1a73e8;
-            text-decoration: none;
+            color: #93c5fd;
+            margin-bottom: 10px;
         }
 
         .card {
-            background: white;
-            padding: 15px;
+            background: #1e293b;
+            padding: 20px;
             margin-top: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            background: #273449;
+        }
+
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -47,36 +78,36 @@
 
 <header>
     <h1>Shreyas</h1>
-    <p>Exploring physics through curiosity, problems, and ideas</p>
+    <p>Exploring physics through curiosity, equations, and ideas</p>
 </header>
 
-<section>
+<div class="container">
+
     <h2>About</h2>
     <p>
-        I'm a high school student interested in astrophysics and theoretical physics.
-        This blog is where I explore ideas, work through problems, and document what I learn.
+        I’m a high school student passionate about astrophysics and theoretical physics.
+        This blog is where I explore ideas, break down concepts, and think deeply about how the universe works.
     </p>
-</section>
 
-<section>
     <h2>Blog</h2>
 
     <div class="card">
         <a href="post1.html"><b>Why Simple Harmonic Motion is Only an Approximation</b></a>
-        <p>A deeper look into when SHM assumptions break down.</p>
+        <p>Understanding where ideal motion models break down in the real world.</p>
     </div>
 
-</section>
-
-<section>
     <h2>Projects</h2>
 
     <div class="card">
-        <b>Oscillations Experiment (coming soon)</b>
-        <p>Exploring real-world deviations from ideal motion.</p>
+        <b>Oscillations Experiment</b>
+        <p>Studying real motion vs theoretical SHM using data and analysis (coming soon).</p>
     </div>
 
-</section>
+</div>
+
+<footer>
+    © 2026 Shreyas | Physics Blog
+</footer>
 
 </body>
 </html>
