@@ -7,12 +7,13 @@
     <style>
         body {
             margin: 0;
-            font-family: "Segoe UI", Arial;
+            font-family: "Segoe UI", Arial, sans-serif;
             background: #0b1220;
             color: #e5e7eb;
             scroll-behavior: smooth;
         }
 
+        /* NAV */
         nav {
             position: fixed;
             top: 0;
@@ -20,26 +21,35 @@
             background: #111827;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 18px;
             padding: 12px;
+            z-index: 1000;
         }
 
         nav a {
             color: #93c5fd;
             text-decoration: none;
+            font-size: 14px;
         }
 
+        /* SECTIONS */
         section {
             min-height: 100vh;
-            padding: 100px 20px;
+            padding: 110px 20px;
             max-width: 900px;
             margin: auto;
         }
 
         h1, h2 {
             color: #60a5fa;
+            margin-bottom: 10px;
         }
 
+        .center {
+            text-align: center;
+        }
+
+        /* CARDS */
         .card {
             background: #111827;
             padding: 18px;
@@ -48,8 +58,21 @@
             border: 1px solid #1f2937;
         }
 
-        .center {
-            text-align: center;
+        /* ANIMATION */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tag {
+            color: #93c5fd;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -58,38 +81,113 @@
 
 <nav>
     <a href="#home">Home</a>
-    <a href="#ach">Achievements</a>
-    <a href="#proj">Projects</a>
-    <a href="#blog">Blog</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#projects">Projects</a>
+    <a href="#extras">Extracurriculars</a>
     <a href="#goals">Goals</a>
 </nav>
 
-<section id="home" class="center">
-    <h1>Shreyas</h1>
-    <p>Physics • Engineering • Computational Thinking</p>
+<!-- HOME -->
+<section id="home" class="center reveal">
+    <h1>Astrophysics & Physics</h1>
+    <p>Shreyas | Engineering • Theoretical Thinking • Computational Physics</p>
 </section>
 
-<section id="ach">
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="reveal">
     <h2>Achievements</h2>
-    <div class="card">Best All-Rounder Award</div>
-    <div class="card">IEO Merit (Level 2)</div>
-    <div class="card">VSSF Top 100</div>
+
+    <div class="card">
+        <b>🏆 Medals / Awards</b>
+        <ul>
+            <li>Best All-Rounder Award – Vikas The Concept School</li>
+            <li>IEO Certificate of Merit (Level 2) – Twice</li>
+            <li>Top ~100 – VSSF National Science Competition</li>
+            <li>🥈 Runner-up – Interschool Football Tournament</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <b>📌 Participation</b>
+        <ul>
+            <li>CBSE Regional Science Exhibition – Arduino + I2C System</li>
+            <li>Viksit Bharat Buildathon 2026</li>
+            <li>CBSE Zonal Football (U-19, 3 years)</li>
+            <li>NCC Cadet (2024–2026)</li>
+        </ul>
+    </div>
 </section>
 
-<section id="proj">
+<!-- PROJECTS -->
+<section id="projects" class="reveal">
     <h2>Projects</h2>
-    <div class="card">Arduino Smart Drainage System</div>
+
+    <div class="card">
+        <b>Smart Drainage Overflow Detection System</b>
+        <p class="tag">Arduino • GSM • Sensors • Embedded Systems</p>
+        <p>
+            Built a real-time flood detection system using ultrasonic sensors,
+            Arduino communication (I2C), and GSM-based SMS alerts.
+        </p>
+    </div>
+
+    <div class="card">
+        <b>Innovation Buildathon Project</b>
+        <p>National-level problem-solving and prototyping competition.</p>
+    </div>
 </section>
 
-<section id="blog">
-    <h2>Thinking</h2>
-    <div class="card">SHM is only an approximation</div>
+<!-- EXTRACURRICULARS -->
+<section id="extras" class="reveal">
+    <h2>Extracurriculars</h2>
+
+    <div class="card">
+        <b>⚽ Football</b>
+        <p>Competitive player, CBSE Zonal representation (U-19), interschool runner-up.</p>
+    </div>
+
+    <div class="card">
+        <b>🎻 Violin</b>
+        <p>Trained musician with performance experience.</p>
+    </div>
+
+    <div class="card">
+        <b>🪖 NCC Cadet</b>
+        <p>Training in discipline, leadership, and national service (2024–2026).</p>
+    </div>
 </section>
 
-<section id="goals">
+<!-- GOALS -->
+<section id="goals" class="reveal">
     <h2>Goals</h2>
-    <div class="card">Astrophysics • IISER • IISc • Research mindset</div>
+
+    <div class="card">
+        Pursue higher studies in Physics with focus on astrophysics and theoretical physics.
+    </div>
+
+    <div class="card">
+        Target universities: <b>MIT, Yale, Ivy League institutions</b> and other top global physics programs.
+    </div>
+
+    <div class="card">
+        Develop strong research and computational physics skills for advanced scientific work.
+    </div>
 </section>
+
+<!-- ANIMATION SCRIPT -->
+<script>
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+            }
+        });
+    });
+
+    document.querySelectorAll(".reveal").forEach(el => {
+        observer.observe(el);
+    });
+</script>
 
 </body>
 </html>
