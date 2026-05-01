@@ -1,77 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Achievements</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achievements</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: "Segoe UI", Arial;
-            background: #0a0f1c;
-            color: #e5e7eb;
-        }
+<style>
+body{margin:0;font-family:Segoe UI;background:#070b14;color:#e5e7eb;}
 
-        nav {
-            position: sticky;
-            top: 0;
-            background: rgba(17,24,39,0.75);
-            backdrop-filter: blur(14px);
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 14px;
-        }
-
-        nav a { color: #93c5fd; text-decoration: none; }
-
-        section {
-            max-width: 900px;
-            margin: auto;
-            padding: 80px 20px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .card {
-            background: #111827;
-            padding: 18px;
-            border-radius: 14px;
-            border: 1px solid #1f2937;
-        }
-
-        h2 { color: #60a5fa; }
-
-        .reveal {
-    opacity: 0;
-    transform: translateY(50px) scale(0.98);
-    filter: blur(6px);
-    transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+nav{
+position:sticky;top:0;background:rgba(17,24,39,0.7);
+backdrop-filter:blur(14px);
+display:flex;justify-content:center;gap:20px;padding:14px;
+border-bottom:1px solid #1f2937;
 }
 
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0px);
+nav a{color:#93c5fd;text-decoration:none;}
+
+section{max-width:900px;margin:auto;padding:80px 20px;}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+
+.card{
+background:#111827;
+padding:18px;
+border-radius:14px;
+border:1px solid #1f2937;
+margin-top:15px;
 }
 
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-        }
-    </style>
+h2{color:#60a5fa;}
+
+.reveal{
+opacity:0;
+transform:translateY(40px) scale(0.98);
+filter:blur(6px);
+transition:all 0.9s ease;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0) scale(1);
+filter:blur(0);
+}
+
+@media(max-width:768px){.grid{grid-template-columns:1fr;}}
+</style>
 </head>
 
 <body>
 
 <nav>
-    <a href="index.html">Home</a>
-    <a href="achievements.html">Achievements</a>
-    <a href="projects.html">Projects</a>
-    <a href="goals.html">Goals</a>
+<a href="index.html">Home</a>
+<a href="achievements.html">Achievements</a>
+<a href="projects.html">Projects</a>
+<a href="goals.html">Goals</a>
+<a href="blog.html">Blog</a>
 </nav>
 
 <section>
@@ -82,18 +65,18 @@
 
 <div class="card reveal">
 <h2>🏆 Awards</h2>
-<p>Best All-Rounder Award – Vikas The Concept School</p>
+<p>Best All-Rounder Award – School</p>
 <p>IEO Merit (Level 2) – Twice</p>
-<p>Top ~100 – VSSF Competition</p>
-<p>🥈 Runner-up – Football Tournament</p>
+<p>Top ~100 – VSSF</p>
+<p>🥈 Football Runner-up</p>
 </div>
 
 <div class="card reveal">
 <h2>📌 Participation</h2>
-<p>CBSE Science Exhibition – Arduino + I2C</p>
+<p>CBSE Science Exhibition (Arduino + I2C)</p>
 <p>Buildathon 2026</p>
-<p>CBSE Zonal Football (3 years)</p>
-<p>NCC Cadet (2024–2026)</p>
+<p>CBSE Zonal Football</p>
+<p>NCC Cadet</p>
 </div>
 
 </div>
@@ -101,12 +84,10 @@
 </section>
 
 <script>
-const observer = new IntersectionObserver(e=>{
-e.forEach(x=>{
-if(x.isIntersecting)x.target.classList.add("active");
+const o=new IntersectionObserver(e=>{
+e.forEach(x=>{if(x.isIntersecting)x.target.classList.add("active")});
 });
-});
-document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));
+document.querySelectorAll(".reveal").forEach(e=>o.observe(e));
 </script>
 
 </body>
