@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Achievements | Shreyas</title>
+    <title>Achievements</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
@@ -10,75 +10,46 @@
             font-family: "Segoe UI", Arial;
             background: #0a0f1c;
             color: #e5e7eb;
-            scroll-behavior: smooth;
         }
 
-        /* NAV */
         nav {
             position: sticky;
             top: 0;
-            background: rgba(17, 24, 39, 0.75);
+            background: rgba(17,24,39,0.75);
             backdrop-filter: blur(14px);
             display: flex;
             justify-content: center;
             gap: 20px;
             padding: 14px;
-            border-bottom: 1px solid #1f2937;
         }
 
-        nav a {
-            color: #93c5fd;
-            text-decoration: none;
-            font-size: 14px;
-        }
+        nav a { color: #93c5fd; text-decoration: none; }
 
-        nav a:hover {
-            color: white;
-        }
-
-        /* LAYOUT */
         section {
             max-width: 900px;
             margin: auto;
             padding: 80px 20px;
         }
 
-        h1, h2 {
-            color: #60a5fa;
-        }
-
-        /* GRID */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
-        @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* CARDS */
         .card {
             background: #111827;
             padding: 18px;
             border-radius: 14px;
             border: 1px solid #1f2937;
-            transition: 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #3b82f6;
-        }
+        h2 { color: #60a5fa; }
 
-        /* ANIMATION */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease;
+            transition: 0.8s;
         }
 
         .reveal.active {
@@ -86,16 +57,14 @@
             transform: translateY(0);
         }
 
-        p {
-            color: #cbd5e1;
-            line-height: 1.6;
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
 <body>
 
-<!-- NAV -->
 <nav>
     <a href="index.html">Home</a>
     <a href="achievements.html">Achievements</a>
@@ -103,48 +72,39 @@
     <a href="goals.html">Goals</a>
 </nav>
 
-<!-- CONTENT -->
 <section>
 
-    <h1 class="reveal">Achievements</h1>
+<h1 class="reveal">Achievements</h1>
 
-    <div class="grid">
+<div class="grid">
 
-        <!-- AWARDS -->
-        <div class="card reveal">
-            <h2>🏆 Awards</h2>
-            <p>Best All-Rounder Award – Vikas The Concept School</p>
-            <p>IEO Certificate of Merit (Level 2) – Twice</p>
-            <p>Top ~100 – VSSF National Science Competition</p>
-            <p>🥈 Runner-up – Interschool Football Tournament</p>
-        </div>
+<div class="card reveal">
+<h2>🏆 Awards</h2>
+<p>Best All-Rounder Award – Vikas The Concept School</p>
+<p>IEO Merit (Level 2) – Twice</p>
+<p>Top ~100 – VSSF Competition</p>
+<p>🥈 Runner-up – Football Tournament</p>
+</div>
 
-        <!-- PARTICIPATION -->
-        <div class="card reveal">
-            <h2>📌 Participation</h2>
-            <p>CBSE Regional Science Exhibition – Arduino + I2C System</p>
-            <p>Viksit Bharat Buildathon 2026</p>
-            <p>CBSE Zonal Football (U-19, 3 years)</p>
-            <p>NCC Cadet (2024–2026)</p>
-        </div>
+<div class="card reveal">
+<h2>📌 Participation</h2>
+<p>CBSE Science Exhibition – Arduino + I2C</p>
+<p>Buildathon 2026</p>
+<p>CBSE Zonal Football (3 years)</p>
+<p>NCC Cadet (2024–2026)</p>
+</div>
 
-    </div>
+</div>
 
 </section>
 
-<!-- ANIMATION SCRIPT -->
 <script>
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-        }
-    });
+const observer = new IntersectionObserver(e=>{
+e.forEach(x=>{
+if(x.isIntersecting)x.target.classList.add("active");
 });
-
-document.querySelectorAll(".reveal").forEach(el => {
-    observer.observe(el);
 });
+document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));
 </script>
 
 </body>
