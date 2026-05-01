@@ -1,85 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Blog | Shreyas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: #0b1220;
-            color: #e5e7eb;
-        }
+<style>
+body{margin:0;font-family:Segoe UI;background:#070b14;color:#e5e7eb;}
 
-        header {
-            text-align: center;
-            padding: 60px;
-            background: #1e3a8a;
-        }
+nav{
+position:sticky;top:0;background:rgba(17,24,39,0.7);
+backdrop-filter:blur(14px);
+display:flex;justify-content:center;gap:20px;padding:14px;
+}
 
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            padding: 14px;
-            background: #111827;
-        }
+nav a{color:#93c5fd;text-decoration:none;}
 
-        nav a {
-            color: #93c5fd;
-            text-decoration: none;
-        }
+.container{max-width:900px;margin:auto;padding:80px 20px;}
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 30px;
-        }
+.card{
+background:#111827;
+padding:18px;
+border-radius:14px;
+border:1px solid #1f2937;
+margin-top:15px;
+}
 
-        .card {
-            background: #111827;
-            padding: 18px;
-            border-radius: 12px;
-            margin-top: 15px;
-            border: 1px solid #1f2937;
-        }
+.reveal{
+opacity:0;
+transform:translateY(40px) scale(0.98);
+filter:blur(6px);
+transition:all 0.9s ease;
+}
 
-        a {
-            color: #93c5fd;
-            text-decoration: none;
-            font-size: 18px;
-        }
+.reveal.active{
+opacity:1;
+transform:translateY(0) scale(1);
+filter:blur(0);
+}
 
-        .small {
-            font-size: 13px;
-            color: #9ca3af;
-        }
-    </style>
+a{color:#93c5fd;text-decoration:none;}
+</style>
 </head>
 
 <body>
 
-<header>
-    <h1>Blog</h1>
-</header>
-
 <nav>
-    <a href="index.html">Home</a>
-    <a href="achievements.html">Achievements</a>
-    <a href="projects.html">Projects</a>
-    <a href="goals.html">Goals</a>
-    <a href="blog.html">Blog</a>
+<a href="index.html">Home</a>
+<a href="achievements.html">Achievements</a>
+<a href="projects.html">Projects</a>
+<a href="goals.html">Goals</a>
+<a href="blog.html">Blog</a>
 </nav>
 
 <div class="container">
 
-    <div class="card">
-        <a href="post1.html"><b>Why Simple Harmonic Motion is Only an Approximation</b></a>
-        <p class="small">Exploring limits of ideal physics models in real systems.</p>
-    </div>
+<h1 class="reveal">Blog</h1>
+
+<div class="card reveal">
+<a href="post1.html"><b>Why Simple Harmonic Motion is Only an Approximation</b></a>
+<p>Limits of ideal physics models in real systems.</p>
+</div>
 
 </div>
+
+<script>
+const o=new IntersectionObserver(e=>{
+e.forEach(x=>{if(x.isIntersecting)x.target.classList.add("active")});
+});
+document.querySelectorAll(".reveal").forEach(e=>o.observe(e));
+</script>
 
 </body>
 </html>
