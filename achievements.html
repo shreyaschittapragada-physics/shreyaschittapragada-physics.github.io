@@ -10,6 +10,7 @@ body {
     font-family: "Segoe UI", sans-serif;
     background: #070b14;
     color: #e5e7eb;
+    overflow-x: hidden;
 }
 
 /* NAV */
@@ -23,6 +24,7 @@ nav {
     padding: 10px 18px;
     background: rgba(17, 24, 39, 0.55);
     backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 999px;
     z-index: 1000;
 }
@@ -39,7 +41,7 @@ section {
     padding: 110px 20px;
 }
 
-/* CARD */
+/* CARDS */
 .card {
     background: linear-gradient(145deg,#111827,#0b1220);
     padding: 18px;
@@ -47,19 +49,31 @@ section {
     border: 1px solid #1f2937;
     margin-top: 15px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
-/* 🔥 Glow hover */
+/* 🔥 glow */
 .card:hover {
-    transform: translateY(-6px) scale(1.01);
+    transform: translateY(-6px);
     border-color: #3b82f6;
-    box-shadow: 0 10px 30px rgba(59,130,246,0.25);
+    box-shadow: 0 10px 25px rgba(59,130,246,0.25);
 }
 
-/* HEADINGS */
 h2 { color: #60a5fa; }
-h3 { color: #93c5fd; margin-top: 18px; }
+
+/* REVEAL */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px) scale(0.97);
+    filter: blur(10px);
+    transition: all 1s cubic-bezier(0.2,0.8,0.2,1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
 
 /* MODAL */
 .modal {
@@ -68,44 +82,34 @@ h3 { color: #93c5fd; margin-top: 18px; }
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
 }
 
 .modal-content {
     background: #111827;
     margin: 5% auto;
-    padding: 25px;
+    padding: 22px;
     width: 90%;
-    max-width: 900px;
+    max-width: 800px;
     border-radius: 16px;
+    border: 1px solid #1f2937;
 }
 
 .close {
     float: right;
     font-size: 26px;
     cursor: pointer;
+    color: #93c5fd;
 }
 
-/* IMAGE */
-img {
-    width: 100%;
-    max-width: 750px;
-    border-radius: 12px;
-    margin-top: 10px;
-}
-
-/* LIST */
-.participation-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 15px;
-}
-
+/* PARTICIPATION ITEMS */
 .participation-item {
     background: #020617;
-    padding: 14px;
-    border-radius: 12px;
+    padding: 12px;
+    border-radius: 10px;
     border: 1px solid #1f2937;
+    margin-top: 10px;
     cursor: pointer;
     transition: 0.25s;
 }
@@ -121,56 +125,51 @@ img {
 
 <nav>
 <a href="index.html">Home</a>
+<a href="achievements.html">Achievements</a>
 <a href="projects.html">Projects</a>
+<a href="goals.html">Goals</a>
+<a href="blog.html">Blog</a>
 </nav>
 
 <section>
 
-<h1>Projects</h1>
+<h1 class="reveal">Projects</h1>
 
 <!-- PROJECTS -->
-<div class="card" onclick="openProject('drainage')">
+<div class="card reveal" onclick="openProject('drainage')">
 <h2>⚙️ Smart Drainage System</h2>
-<p>Dual Arduino + I2C + Ultrasonic + GSM</p>
+<p>Arduino + HC-SR04 + GSM + I2C</p>
 </div>
 
-<div class="card" onclick="openProject('earthquake')">
+<div class="card reveal" onclick="openProject('earthquake')">
 <h2>🌍 Earthquake Detection System</h2>
 <p>Arduino + Vibration Sensor</p>
 </div>
 
 <!-- PARTICIPATION -->
-<div class="card">
+<div class="card reveal">
 <h2>🏆 Participation</h2>
 
-<div class="participation-list">
-
 <div class="participation-item" onclick="openProject('science')">
-⚙️ <b>CBSE Science Exhibition</b><br>
-Arduino + I2C Project
+⚙️ <b>CBSE Science Exhibition</b>
 </div>
 
 <div class="participation-item" onclick="openProject('buildathon')">
-🏆 <b>Viksit Bharat Buildathon 2025</b><br>
-Innovation Event
+🏆 <b>Viksit Bharat Buildathon 2025</b>
 </div>
 
 <div class="participation-item" onclick="openProject('millet')">
-🎭 <b>Milletutopia – Skit (HCU)</b><br>
-Sustainability Performance
+🎭 <b>Milletutopia – Skit (HCU)</b>
 </div>
 
 <div class="participation-item" onclick="openProject('football')">
-⚽ <b>CBSE Zonal Clusters</b><br>
-Football Representation
+⚽ <b>CBSE Zonal Clusters</b>
 </div>
 
 <div class="participation-item" onclick="openProject('ncc')">
-🎖️ <b>NCC Cadet</b><br>
-"A" Certificate (2024–2026)
+🎖️ <b>NCC Cadet</b>
 </div>
 
-</div>
 </div>
 
 </section>
@@ -185,64 +184,57 @@ Football Representation
 
 <script>
 
+/* REVEAL */
+const observer = new IntersectionObserver((entries) => {
+entries.forEach((entry,i)=>{
+if(entry.isIntersecting){
+setTimeout(()=>entry.target.classList.add("active"),i*80);
+}
+});
+},{threshold:0.12});
+
+document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));
+
+/* OPEN PROJECT */
 function openProject(type){
 
 let content="";
 
 /* PROJECTS */
-
 if(type==="drainage"){
-content=`
-<h2>Smart Drainage System</h2>
-<p>Dual Arduino system using I2C communication to monitor water level and send GSM alerts.</p>
-`;
+content=`<h2>Smart Drainage System</h2>
+<p>Dual Arduino + I2C based overflow monitoring system.</p>`;
 }
 
 if(type==="earthquake"){
-content=`
-<h2>Earthquake Detection System</h2>
-<p>Detects vibration using sensor and alerts via buzzer.</p>
-`;
+content=`<h2>Earthquake Detection System</h2>
+<p>Vibration-based alert system using Arduino.</p>`;
 }
 
 /* PARTICIPATION */
-
 if(type==="science"){
-content=`
-<h2>CBSE Science Exhibition</h2>
-<p>Presented an Arduino-based system using I2C communication demonstrating multi-controller architecture.</p>
-`;
+content=`<h2>CBSE Science Exhibition</h2>
+<p>Presented Arduino project using I2C communication.</p>`;
 }
 
 if(type==="buildathon"){
-content=`
-<h2>Viksit Bharat Buildathon 2025</h2>
-<p>Participated in a national-level innovation challenge focused on problem-solving and technology development.</p>
-`;
+content=`<h2>Viksit Bharat Buildathon 2025</h2>
+<p>Participated in national innovation challenge.</p>`;
 }
 
 if(type==="millet"){
-content=`
-<h2>Milletutopia – Skit (HCU)</h2>
-<p>Performed in an inter-school skit promoting sustainable food systems and millet awareness.</p>
-
-<h3>Skills Gained</h3>
-<p>Public speaking, teamwork, creativity, sustainability awareness.</p>
-`;
+content=`<h2>Milletutopia – Skit (HCU)</h2>
+<p>Performed sustainability awareness skit on millet-based diets.</p>`;
 }
 
 if(type==="football"){
-content=`
-<h2>CBSE Zonal Clusters – Football</h2>
-<p>Represented school in inter-school football competition.</p>
-`;
+content=`<h2>CBSE Zonal Clusters – Football</h2>
+<p>Represented school in inter-school football competition.</p>`;
 }
 
 if(type==="ncc"){
-content=`
-<h2>NCC Cadet</h2>
-<p>Pursuing "A" Certificate (2024–2026), developing discipline, leadership, and physical training.</p>
-`;
+content=`<h2>NCC Cadet</h2>
+<p>Pursuing "A" Certificate (2024–2026).</p>`;
 }
 
 document.getElementById("modal-body").innerHTML=content;
