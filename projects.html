@@ -10,10 +10,8 @@ body {
     font-family: "Segoe UI", sans-serif;
     background: #070b14;
     color: #e5e7eb;
-    overflow-x: hidden;
 }
 
-/* NAV */
 nav {
     position: fixed;
     top: 14px;
@@ -24,7 +22,6 @@ nav {
     padding: 10px 18px;
     background: rgba(17, 24, 39, 0.55);
     backdrop-filter: blur(18px);
-    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 999px;
     z-index: 1000;
 }
@@ -34,14 +31,12 @@ nav a {
     text-decoration: none;
 }
 
-/* SECTION */
 section {
     max-width: 900px;
     margin: auto;
     padding: 110px 20px;
 }
 
-/* CARDS */
 .card {
     background: linear-gradient(145deg,#111827,#0b1220);
     padding: 18px;
@@ -49,6 +44,7 @@ section {
     border: 1px solid #1f2937;
     margin-top: 15px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 .card:hover {
@@ -56,69 +52,43 @@ section {
     border-color: #3b82f6;
 }
 
-h2 { color: #60a5fa; }
-
-/* REVEAL */
-.reveal {
-    opacity: 0;
-    transform: translateY(60px) scale(0.97);
-    filter: blur(10px);
-    transition: all 1s cubic-bezier(0.2,0.8,0.2,1);
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-}
-
-/* MODAL */
 .modal {
     display: none;
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(10px);
-    z-index: 2000;
 }
 
 .modal-content {
     background: #111827;
     margin: 5% auto;
-    padding: 22px;
+    padding: 25px;
     width: 90%;
-    max-width: 800px;
+    max-width: 900px;
     border-radius: 16px;
-    border: 1px solid #1f2937;
 }
 
 .close {
     float: right;
     font-size: 26px;
     cursor: pointer;
-    color: #93c5fd;
 }
 
-/* SVG wiring style */
-svg {
+img {
     width: 100%;
+    max-width: 750px;
+    border-radius: 12px;
     margin-top: 10px;
 }
 
-.wire {
-    stroke: #60a5fa;
-    stroke-width: 2;
+pre {
+    background: #020617;
+    padding: 12px;
+    border-radius: 8px;
 }
 
-.node {
-    fill: #93c5fd;
-}
-
-.label {
-    fill: #e5e7eb;
-    font-size: 12px;
-}
+h3 { color: #93c5fd; }
 </style>
 </head>
 
@@ -126,29 +96,25 @@ svg {
 
 <nav>
 <a href="index.html">Home</a>
-<a href="achievements.html">Achievements</a>
 <a href="projects.html">Projects</a>
-<a href="goals.html">Goals</a>
-<a href="blog.html">Blog</a>
 </nav>
 
 <section>
 
-<h1 class="reveal">Projects</h1>
+<h1>Projects</h1>
 
-<div class="card reveal" onclick="openProject('drainage')">
+<div class="card" onclick="openProject('drainage')">
 <h2>Smart Drainage System</h2>
-<p>Arduino + HC-SR04 + GSM + I2C</p>
+<p>Dual Arduino + I2C + Ultrasonic + GSM</p>
 </div>
 
-<div class="card reveal" onclick="openProject('earthquake')">
+<div class="card" onclick="openProject('earthquake')">
 <h2>Earthquake Detection System</h2>
 <p>Arduino + Vibration Sensor</p>
 </div>
 
 </section>
 
-<!-- MODAL -->
 <div id="modal" class="modal">
 <div class="modal-content">
 <span class="close" onclick="closeModal()">&times;</span>
@@ -158,65 +124,62 @@ svg {
 
 <script>
 
-/* REVEAL */
-const observer = new IntersectionObserver((entries) => {
-entries.forEach((entry,i)=>{
-if(entry.isIntersecting){
-setTimeout(()=>entry.target.classList.add("active"),i*80);
-}
-});
-},{threshold:0.12});
-
-document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));
-
-/* OPEN PROJECT */
 function openProject(type){
 
 let content="";
 
 if(type==="drainage"){
 content=`
-<h2>Smart Drainage System</h2>
-<p><b>Real Wiring Schematic (Arduino Level)</b></p>
+<h2>Smart Drainage System (Dual Arduino - I2C)</h2>
 
-<svg viewBox="0 0 600 300">
+<p>
+This system uses two Arduino boards communicating via I2C.
+The first Arduino (Slave) measures water level using an ultrasonic sensor.
+The second Arduino (Master) processes the data and triggers GSM alerts and buzzer.
+</p>
 
-<!-- Arduino -->
-<rect x="250" y="120" width="100" height="60" fill="#1f2937" stroke="#60a5fa"/>
-<text x="265" y="155" class="label">Arduino UNO</text>
+<h3>System Architecture</h3>
+<p>
+• Slave Arduino → Sensor Processing  
+• Master Arduino → Decision + GSM Alert  
+• Communication via I2C (SDA, SCL)
+</p>
 
-<!-- Sensor -->
-<circle cx="100" cy="100" r="15" class="node"/>
-<text x="70" y="80" class="label">HC-SR04</text>
+<h3>Circuit Diagram</h3>
+<div style="text-align:center;">
+<img src="images/drainage.png">
+</div>
 
-<!-- GSM -->
-<circle cx="500" cy="100" r="15" class="node"/>
-<text x="480" y="80" class="label">GSM</text>
-
-<!-- Buzzer -->
-<circle cx="100" cy="220" r="15" class="node"/>
-<text x="80" y="200" class="label">Buzzer</text>
-
-<!-- Wires -->
-<line x1="115" y1="100" x2="250" y2="140" class="wire"/>
-<line x1="350" y1="140" x2="485" y2="100" class="wire"/>
-<line x1="300" y1="180" x2="100" y2="205" class="wire"/>
-
-</svg>
-
-<p><b>Pin Mapping:</b></p>
+<h3>Pin Connections</h3>
 <pre>
-HC-SR04 → Arduino
-VCC → 5V
-GND → GND
+ULTRASONIC (Slave Arduino)
+VCC  → 5V
+GND  → GND
 TRIG → D9
 ECHO → D10
 
-GSM Module:
-TX → RX
-RX → TX
-VCC → 5V External
+I2C BETWEEN ARDUINOS
+SDA → A4 (both)
+SCL → A5 (both)
+GND → Common
+
+GSM (Master Arduino)
+TX → D7 (RX)
+RX → D6 (TX)
+VCC → External 5V
+GND → GND
+
+BUZZER (Master)
++ → D8
+- → GND
 </pre>
+
+<h3>Working Principle</h3>
+<p>
+The Slave Arduino continuously measures water level using ultrasonic sensing.
+Data is sent via I2C to the Master Arduino.
+If threshold is exceeded, Master triggers buzzer and sends SMS using GSM module.
+</p>
 `;
 }
 
@@ -224,39 +187,33 @@ if(type==="earthquake"){
 content=`
 <h2>Earthquake Detection System</h2>
 
-<p><b>Real Wiring Schematic</b></p>
+<p>
+This system detects ground vibrations using a vibration sensor.
+When vibration exceeds a threshold, a buzzer is activated.
+</p>
 
-<svg viewBox="0 0 600 250">
+<h3>Circuit Diagram</h3>
+<div style="text-align:center;">
+<img src="images/earthquake.png">
+</div>
 
-<!-- Arduino -->
-<rect x="250" y="100" width="100" height="60" fill="#1f2937" stroke="#60a5fa"/>
-<text x="265" y="135" class="label">Arduino UNO</text>
-
-<!-- Sensor -->
-<circle cx="120" cy="130" r="15" class="node"/>
-<text x="80" y="110" class="label">Vibration</text>
-
-<!-- Buzzer -->
-<circle cx="480" cy="130" r="15" class="node"/>
-<text x="460" y="110" class="label">Buzzer</text>
-
-<!-- Wires -->
-<line x1="135" y1="130" x2="250" y2="130" class="wire"/>
-<line x1="350" y1="130" x2="465" y2="130" class="wire"/>
-
-</svg>
-
-<p><b>Pin Mapping:</b></p>
+<h3>Pin Connections</h3>
 <pre>
 Vibration Sensor:
 VCC → 5V
 GND → GND
-DO → D2
+DO  → D2
 
 Buzzer:
 + → D8
 - → GND
 </pre>
+
+<h3>Working Principle</h3>
+<p>
+The vibration sensor detects motion and sends signal to Arduino.
+If it crosses threshold, buzzer is activated.
+</p>
 `;
 }
 
