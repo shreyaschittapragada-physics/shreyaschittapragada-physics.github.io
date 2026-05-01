@@ -13,49 +13,78 @@
             scroll-behavior: smooth;
         }
 
-        /* NAV */
+        /* NAV (glass style) */
         nav {
-            position: fixed;
+            position: sticky;
             top: 0;
-            width: 100%;
-            background: #111827;
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(12px);
             display: flex;
             justify-content: center;
             gap: 18px;
-            padding: 12px;
+            padding: 14px;
             z-index: 1000;
+            border-bottom: 1px solid #1f2937;
         }
 
         nav a {
             color: #93c5fd;
             text-decoration: none;
             font-size: 14px;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: white;
         }
 
         /* SECTIONS */
         section {
-            min-height: 100vh;
-            padding: 110px 20px;
-            max-width: 900px;
+            max-width: 950px;
             margin: auto;
+            padding: 100px 20px;
         }
 
-        h1, h2 {
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 130px 20px;
+            background: radial-gradient(circle at top, #1e3a8a, #0b1220 70%);
+        }
+
+        h1 {
+            font-size: 42px;
+            margin: 0;
+        }
+
+        h2 {
             color: #60a5fa;
             margin-bottom: 10px;
         }
 
-        .center {
-            text-align: center;
+        p {
+            color: #cbd5e1;
+            line-height: 1.7;
         }
 
-        /* CARDS */
+        /* CARD SYSTEM */
         .card {
-            background: #111827;
+            background: linear-gradient(145deg, #111827, #0f172a);
             padding: 18px;
             margin-top: 15px;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid #1f2937;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+        }
+
+        .tag {
+            color: #93c5fd;
+            font-size: 13px;
         }
 
         /* ANIMATION */
@@ -70,15 +99,22 @@
             transform: translateY(0);
         }
 
-        .tag {
-            color: #93c5fd;
-            font-size: 13px;
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
 <body>
 
+<!-- NAV -->
 <nav>
     <a href="#home">Home</a>
     <a href="#achievements">Achievements</a>
@@ -87,34 +123,38 @@
     <a href="#goals">Goals</a>
 </nav>
 
-<!-- HOME -->
-<section id="home" class="center reveal">
+<!-- HERO -->
+<section id="home" class="hero reveal">
     <h1>Astrophysics & Physics</h1>
-    <p>Shreyas | Engineering • Theoretical Thinking • Computational Physics</p>
+    <p>Shreyas | Theoretical Physics • Engineering • Computational Thinking</p>
 </section>
 
 <!-- ACHIEVEMENTS -->
 <section id="achievements" class="reveal">
     <h2>Achievements</h2>
 
-    <div class="card">
-        <b>🏆 Medals / Awards</b>
-        <ul>
-            <li>Best All-Rounder Award – Vikas The Concept School</li>
-            <li>IEO Certificate of Merit (Level 2) – Twice</li>
-            <li>Top ~100 – VSSF National Science Competition</li>
-            <li>🥈 Runner-up – Interschool Football Tournament</li>
-        </ul>
-    </div>
+    <div class="grid">
 
-    <div class="card">
-        <b>📌 Participation</b>
-        <ul>
-            <li>CBSE Regional Science Exhibition – Arduino + I2C System</li>
-            <li>Viksit Bharat Buildathon 2026</li>
-            <li>CBSE Zonal Football (U-19, 3 years)</li>
-            <li>NCC Cadet (2024–2026)</li>
-        </ul>
+        <div class="card">
+            <b>🏆 Awards</b>
+            <ul>
+                <li>Best All-Rounder Award – Vikas The Concept School</li>
+                <li>IEO Certificate of Merit (Level 2) – Twice</li>
+                <li>Top ~100 – VSSF National Science Competition</li>
+                <li>🥈 Runner-up – Interschool Football Tournament</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <b>📌 Participation</b>
+            <ul>
+                <li>CBSE Regional Science Exhibition – Arduino + I2C system</li>
+                <li>Viksit Bharat Buildathon 2026</li>
+                <li>CBSE Zonal Football (U-19)</li>
+                <li>NCC Cadet (2024–2026)</li>
+            </ul>
+        </div>
+
     </div>
 </section>
 
@@ -126,14 +166,14 @@
         <b>Smart Drainage Overflow Detection System</b>
         <p class="tag">Arduino • GSM • Sensors • Embedded Systems</p>
         <p>
-            Built a real-time flood detection system using ultrasonic sensors,
-            Arduino communication (I2C), and GSM-based SMS alerts.
+            Real-time flood monitoring system using ultrasonic sensors, I2C communication,
+            and GSM-based SMS alerts for remote detection.
         </p>
     </div>
 
     <div class="card">
-        <b>Innovation Buildathon Project</b>
-        <p>National-level problem-solving and prototyping competition.</p>
+        <b>Engineering Buildathon Project</b>
+        <p>National-level innovation challenge focused on real-world problem solving.</p>
     </div>
 </section>
 
@@ -143,7 +183,7 @@
 
     <div class="card">
         <b>⚽ Football</b>
-        <p>Competitive player, CBSE Zonal representation (U-19), interschool runner-up.</p>
+        <p>CBSE Zonal player (U-19), interschool runner-up (2nd place), multiple tournaments.</p>
     </div>
 
     <div class="card">
@@ -152,8 +192,8 @@
     </div>
 
     <div class="card">
-        <b>🪖 NCC Cadet</b>
-        <p>Training in discipline, leadership, and national service (2024–2026).</p>
+        <b>🪖 NCC</b>
+        <p>Cadet training (2024–2026), leadership and discipline development.</p>
     </div>
 </section>
 
@@ -162,15 +202,15 @@
     <h2>Goals</h2>
 
     <div class="card">
-        Pursue higher studies in Physics with focus on astrophysics and theoretical physics.
+        Pursue higher studies in Physics with focus on Astrophysics and Theoretical Physics.
     </div>
 
     <div class="card">
-        Target universities: <b>MIT, Yale, Ivy League institutions</b> and other top global physics programs.
+        Target institutions: <b>MIT, Yale, Ivy League universities</b> and top global physics programs.
     </div>
 
     <div class="card">
-        Develop strong research and computational physics skills for advanced scientific work.
+        Build strong research capability in computational and theoretical physics.
     </div>
 </section>
 
@@ -182,7 +222,7 @@
                 entry.target.classList.add("active");
             }
         });
-    });
+    }, { threshold: 0.1 });
 
     document.querySelectorAll(".reveal").forEach(el => {
         observer.observe(el);
